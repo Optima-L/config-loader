@@ -1,5 +1,5 @@
 [versions]
-kaml = "0.92.0"
+kaml = "0.102.0"
 koin = "4.0.0-RC1"
 kotlinx-serialization = "1.8.0"
 
