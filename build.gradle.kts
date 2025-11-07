@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.serialization") version "2.1.21"
     `java-library`
     id("com.gradleup.shadow") version "9.0.0-beta4"
+    id("maven-publish")
 }
 
 group = "org.optima"
@@ -12,11 +13,10 @@ repositories {
     mavenCentral()
 }
 
-// Используем версии из libs. Если нет, можно указать напрямую.
 dependencies {
-    implementation("com.charleskorn.kaml:kaml:0.92.0")
-    implementation("io.insert-koin:koin-core:4.0.0-RC1")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+    implementation(libs.kaml)
+    implementation(libs.koin.core)
+    implementation(libs.kotlinx.serialization)
 }
 
 kotlin {
@@ -24,8 +24,7 @@ kotlin {
 }
 
 tasks.jar {
-    archiveBaseName.set("config-loader")
-    from(sourceSets.main.get().output)
+    enabled = false
 }
 
 tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
@@ -38,6 +37,19 @@ tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJ
     relocate("com.charleskorn.kaml", "org.optima.configloader.shadow.kaml")
 
     exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            artifact(tasks.named("shadowJar")) {
+                classifier = null
+            }
+            groupId = "com.github.Optima-L"
+            artifactId = "config-loader"
+            version = "1.0.6"
+        }
+    }
 }
 
 tasks.build {
