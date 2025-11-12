@@ -1,6 +1,7 @@
 import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.KSerializer
 import java.io.File
+import kotlin.collections.iterator
 
 class YamlConfigService(
     private val baseDir: File,
