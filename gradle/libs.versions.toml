@@ -1,7 +1,7 @@
 [versions]
 kaml = "0.102.0"
-koin = "4.0.0-RC1"
-kotlinx-serialization = "1.8.0"
+koin = "4.1.1"
+kotlinx-serialization = "1.9.0"
 
 [libraries]
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
