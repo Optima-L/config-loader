@@ -1,3 +1,5 @@
+package org.optima.config
+
 import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.KSerializer
 

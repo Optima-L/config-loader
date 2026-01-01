@@ -1,4 +1,6 @@
-import src.optima.ConfigServiceHolder
+package org.optima.provider
+
+import org.optima.ConfigServiceHolder
 import kotlin.reflect.KProperty
 
 class ConfigDelegate<T : Any>(private val name: String) {

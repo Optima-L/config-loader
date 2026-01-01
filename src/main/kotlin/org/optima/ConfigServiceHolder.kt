@@ -1,6 +1,6 @@
-package src.optima
+package org.optima
 
-import ConfigService
+import org.optima.config.ConfigService
 
 object ConfigServiceHolder {
     lateinit var service: ConfigService
