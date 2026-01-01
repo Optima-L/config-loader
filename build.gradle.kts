@@ -34,8 +34,6 @@ tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJ
 
     from(sourceSets.main.get().output)
 
-    relocate("com.charleskorn.kaml", "org.optima.configloader.shadow.kaml")
-
     exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
 }
 
