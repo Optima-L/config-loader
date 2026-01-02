@@ -3,12 +3,15 @@ package org.optima
 import org.optima.config.ConfigService
 
 object ConfigServiceHolder {
-    lateinit var service: ConfigService
-        private set
 
-    fun init(service: ConfigService) {
-        this.service = service
+    private val services = mutableMapOf<String, ConfigService>()
+
+    fun registerService(key: String, service: ConfigService) {
+        if (services.containsKey(key)) throw IllegalArgumentException("Service $key already exists")
+        services[key] = service
     }
-    val isInitialized: Boolean
-        get() = ::service.isInitialized
+
+    fun getService(key: String): ConfigService {
+        return services[key] ?: throw IllegalArgumentException("Service $key is not registered")
+    }
 }

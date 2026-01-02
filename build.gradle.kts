@@ -33,6 +33,7 @@ tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJ
     archiveVersion.set("")
 
     from(sourceSets.main.get().output)
+    configurations = listOf()
 
     exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
 }

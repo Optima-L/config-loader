@@ -2,10 +2,13 @@ package org.optima.config
 
 import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.KSerializer
+import org.optima.provider.ConfigRegistry
 import java.io.File
 import kotlin.collections.iterator
+import kotlin.jvm.java
 
 class YamlConfigService(
+    val serviceKey: String,
     private val baseDir: File,
     private val yaml: Yaml
 ) : ConfigService {
@@ -22,7 +25,8 @@ class YamlConfigService(
         if (!baseDir.exists()) baseDir.mkdirs()
     }
 
-    override fun <T : Any> register(name: String , serializer: KSerializer<T> , default: T , providedYaml: Yaml?) {
+    override fun <T : Any> register(
+        name: String , serializer: KSerializer<T> , default: T , providedYaml: Yaml?) {
         val file = configFile(name)
         val finallyYaml = providedYaml ?: yaml
         val value = if (file.exists()) {
@@ -32,6 +36,7 @@ class YamlConfigService(
             default
         }
         registry[name] = Entry(serializer, default, value)
+        ConfigRegistry.register(default::class.java, serviceKey)
     }
 
     @Suppress("UNCHECKED_CAST")
