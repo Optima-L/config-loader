@@ -1,10 +1,11 @@
 package org.optima
 
 import org.optima.config.ConfigService
+import java.util.concurrent.ConcurrentHashMap
 
 object ConfigServiceHolder {
 
-    private val services = mutableMapOf<String, ConfigService>()
+    private val services = ConcurrentHashMap<String, ConfigService>()
 
     fun registerService(service: ConfigService) {
         val key = service.serviceKey
@@ -20,6 +21,9 @@ object ConfigServiceHolder {
         services.remove(key)
     }
 
+    fun hasService(serviceKey: String): Boolean {
+        return services.containsKey(serviceKey)
+    }
 
     fun getService(key: String): ConfigService {
         return services[key] ?: throw IllegalArgumentException("Service $key is not registered")
