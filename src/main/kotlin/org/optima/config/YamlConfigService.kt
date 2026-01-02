@@ -8,7 +8,7 @@ import kotlin.collections.iterator
 import kotlin.jvm.java
 
 class YamlConfigService(
-    val serviceKey: String,
+    override val serviceKey: String,
     private val baseDir: File,
     private val yaml: Yaml
 ) : ConfigService {

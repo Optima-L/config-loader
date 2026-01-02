@@ -6,7 +6,8 @@ object ConfigServiceHolder {
 
     private val services = mutableMapOf<String, ConfigService>()
 
-    fun registerService(key: String, service: ConfigService) {
+    fun registerService(service: ConfigService) {
+        val key = service.serviceKey
         if (services.containsKey(key)) throw IllegalArgumentException("Service $key already exists")
         services[key] = service
     }

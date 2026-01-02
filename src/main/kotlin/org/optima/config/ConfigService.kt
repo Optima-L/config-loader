@@ -4,6 +4,7 @@ import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.KSerializer
 
 interface ConfigService {
+    val serviceKey : String
     fun <T : Any> register(name: String , serializer: KSerializer<T> , default: T , providedYaml: Yaml? = null)
     fun <T : Any> getConfig(name: String): T
     fun reload(name: String)
