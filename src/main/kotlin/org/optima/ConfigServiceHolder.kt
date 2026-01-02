@@ -12,6 +12,15 @@ object ConfigServiceHolder {
         services[key] = service
     }
 
+    fun removeService(service: ConfigService) {
+        services.remove(service.serviceKey)
+    }
+
+    fun removeService(key: String) {
+        services.remove(key)
+    }
+
+
     fun getService(key: String): ConfigService {
         return services[key] ?: throw IllegalArgumentException("Service $key is not registered")
     }
